@@ -1,5 +1,5 @@
 #version 460 core
-in vec2 aPos;
+in ivec2 aPos;
 
 void main()
 {
