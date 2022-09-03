@@ -114,7 +114,7 @@ main(int argc, char **argv)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow* window = glfwCreateWindow(800, 800,
-			"pi-collision-calculator", 0, 0);
+			"mandelbrot", 0, 0);
 	glfwMakeContextCurrent(window);
 
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -134,7 +134,7 @@ main(int argc, char **argv)
 		if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, 1);
 
-		sprintf(title, "pi-collision-calculator: %u", col_count);
+		sprintf(title, "mandelbrot: %u", col_count);
 		glfwSetWindowTitle(window, title);
 
 		glClearColor(0, 0, 0, 1);
