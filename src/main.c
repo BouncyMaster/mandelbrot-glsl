@@ -6,8 +6,7 @@
 
 #include "data.h"
 
-unsigned int VAO[3], VBO[3], shader_program;
-
+unsigned int VAO, VBO, shader_program;
 
 void
 framebuffer_size_callback(GLFWwindow* window, int w, int h)
@@ -18,12 +17,12 @@ framebuffer_size_callback(GLFWwindow* window, int w, int h)
 void
 set_data(void)
 {
-	glGenVertexArrays(3, VAO);
-	glGenBuffers(3, VBO);
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
 
-	glBindVertexArray(VAO[0]);
+	glBindVertexArray(VAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(first_square), first_square,
 			GL_STATIC_DRAW);
 
@@ -34,37 +33,6 @@ set_data(void)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float),
 			(void*)(2*sizeof(float)));
 	glEnableVertexAttribArray(1);
-
-
-	glBindVertexArray(VAO[1]);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(second_square), second_square,
-			GL_STATIC_DRAW);
-
-	//position
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), 0);
-	glEnableVertexAttribArray(0);
-	//color
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float),
-			(void*)(2*sizeof(float)));
-	glEnableVertexAttribArray(1);
-
-
-	glBindVertexArray(VAO[2]);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO[2]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(wall_floor), wall_floor,
-			GL_STATIC_DRAW);
-
-	//position
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), 0);
-	glEnableVertexAttribArray(0);
-	//color
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float),
-			(void*)(2*sizeof(float)));
-	glEnableVertexAttribArray(1);
-
 
 	const char *vertex_shader_source = file_to_str("shaders/vertex.glsl"),
 		*fragment_shader_source = file_to_str("shaders/fragment.glsl");
@@ -93,21 +61,9 @@ set_data(void)
 	glUseProgram(shader_program);
 }
 
-
 int
-main(int argc, char **argv)
+main(void)
 {
-	if (argc < 2) {
-		puts("ERROR: Specify mass difference");
-		return 1;
-	}
-
-	float mass_difference = (float)atoi(argv[1]);
-	if (!mass_difference) {
-		puts("ERROR: Invalid mass difference");
-		return 1;
-	}
-
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -122,7 +78,6 @@ main(int argc, char **argv)
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	set_data();
-
 
 	float offset[] = {-.3, .5};
 	unsigned short col_count = 0;
@@ -140,30 +95,15 @@ main(int argc, char **argv)
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glBindVertexArray(VAO[0]);
-
 		glUniform1f(offset_location, offset[0]);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-
-		glBindVertexArray(VAO[1]);
-
-		glUniform1f(offset_location, offset[1]);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-
-		glBindVertexArray(VAO[2]);
-
-		glUniform1f(offset_location, 0);
-		glDrawArrays(GL_TRIANGLE_FAN, 0, 6);
-
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 
-	glDeleteVertexArrays(3, VAO);
-	glDeleteBuffers(3, VBO);
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
 	glDeleteProgram(shader_program);
 
 	glfwTerminate();
