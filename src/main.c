@@ -124,8 +124,7 @@ main(int argc, char **argv)
 	set_data();
 
 
-	float velocity[] = {0, -.003}, aux_velocity[2],
-		offset[] = {-.3, .5};
+	float offset[] = {-.3, .5};
 	unsigned short col_count = 0;
 	char title[32];
 
@@ -138,34 +137,8 @@ main(int argc, char **argv)
 		sprintf(title, "pi-collision-calculator: %u", col_count);
 		glfwSetWindowTitle(window, title);
 
-		if (offset[0]+.2 >= offset[1]) {
-			// First square collision with second square
-			aux_velocity[0] = velocity[0]; aux_velocity[1] = velocity[1];
-
-			velocity[0] =
-				(1-mass_difference)/(mass_difference+1)*
-				aux_velocity[0]+((2*mass_difference)/
-				(mass_difference+1))*aux_velocity[1];
-
-			velocity[1] =
-				(mass_difference-1)/(mass_difference+1)*
-				aux_velocity[1]+(2/(mass_difference+1))*
-				aux_velocity[0];
-			++col_count;
-		} else if (offset[0] <= -.8) {
-			// Second square collision with wall
-			velocity[0] = -(velocity[0]);
-			++col_count;
-		}
-
-		offset[0] += velocity[0];
-		offset[1] += velocity[1];
-
-		glClearColor(.2, .3, .3, 1);
+		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
-
-		if (offset[1] <= -.6) // fast collisions
-			continue; // skip drawing and waiting
 
 		glBindVertexArray(VAO[0]);
 
