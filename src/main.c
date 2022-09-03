@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <file_ops.h>
@@ -27,7 +26,7 @@ set_data(void)
 			GL_STATIC_DRAW);
 
 	//position
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(0, 2, GL_BYTE, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
 
 	const char *vertex_shader_source = file_to_str("shaders/vertex.glsl"),
