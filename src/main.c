@@ -74,7 +74,6 @@ main(void)
 
 	set_data();
 
-	float offset[] = {-.3, .5};
 	unsigned short col_count = 0;
 	char title[32];
 
@@ -90,7 +89,7 @@ main(void)
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		glUniform1f(offset_location, offset[0]);
+		glUniform1f(offset_location, 0.5);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		glfwSwapBuffers(window);
