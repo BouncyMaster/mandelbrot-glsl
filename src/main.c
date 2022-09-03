@@ -23,7 +23,7 @@ set_data(void)
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(first_square), first_square,
+	glBufferData(GL_ARRAY_BUFFER, sizeof(screen_square), screen_square,
 			GL_STATIC_DRAW);
 
 	//position
