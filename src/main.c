@@ -28,7 +28,7 @@ scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 void
 keyboard_callback(GLFWwindow* window)
 {
-	const double d = 0.05 / zoom;
+	const double d = 0.02 / zoom;
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, 1);
