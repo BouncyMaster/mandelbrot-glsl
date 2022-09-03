@@ -27,12 +27,8 @@ set_data(void)
 			GL_STATIC_DRAW);
 
 	//position
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), 0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(0);
-	//color
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float),
-			(void*)(2*sizeof(float)));
-	glEnableVertexAttribArray(1);
 
 	const char *vertex_shader_source = file_to_str("shaders/vertex.glsl"),
 		*fragment_shader_source = file_to_str("shaders/fragment.glsl");
