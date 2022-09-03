@@ -5,11 +5,11 @@ CFLAGS = -std=c99 -O2 -march=native -Wall
 
 SRC = src/main.c external/file_ops/file_ops.c external/glad/src/glad.c
 
-pi-collision-calculator: ${SRC}
+mandelbrot: ${SRC}
 	${CC} -o $@ ${SRC} ${INCS} ${LDFLAGS} ${LIBS} ${CFLAGS}
 
 tags:
 	ctags `find src -name "*.c"`
 
 clean:
-	rm -f pi-collision-calculator tags
+	rm -f mandelbrot tags
