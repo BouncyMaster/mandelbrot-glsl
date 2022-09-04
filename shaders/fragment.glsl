@@ -7,14 +7,6 @@ uniform dvec2 center;
 uniform double zoom;
 uniform int itr;
 
-vec4 map_to_color(float t) {
-	float r = 9.0 * (1.0 - t) * t * t * t;
-	float g = 15.0 * (1.0 - t) * (1.0 - t) * t * t;
-	float b = 8.5 * (1.0 - t) * (1.0 - t) * (1.0 - t) * t;
-
-	return vec4(r, g, b, 1.0);
-}
-
 void main()
 {
 	dvec2 z, c;
@@ -37,7 +29,10 @@ void main()
 		z.y = y;
 	}
 
-	double t = double(i) / double(itr);
+	float t = float(i) / float(itr);
 
-	colorOut = map_to_color(float(t));
+	colorOut = vec4(9.0 * (1.0 - t) * t * t * t,
+			15.0 * (1.0 - t) * (1.0 - t) * t * t,
+			8.5 * (1.0 - t) * (1.0 - t) * (1.0 - t) * t,
+			1);
 }

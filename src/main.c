@@ -8,7 +8,7 @@
 
 unsigned int VAO, VBO, shader_program;
 double cx = 0, cy = 0, zoom = 1;
-int itr = 100, scr[2] = {800, 800};
+int itr = 400, scr[2] = {800, 800};
 
 void
 framebuffer_size_callback(GLFWwindow* window, int w, int h)
