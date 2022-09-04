@@ -10,8 +10,8 @@ uniform int itr;
 void main()
 {
 	dvec2 z, c;
-	c.x = screen_ratio * (gl_FragCoord.x / screen_size.x - 0.5);
-	c.y = (gl_FragCoord.y / screen_size.y - 0.5);
+	c.x = screen_ratio * (gl_FragCoord.x / screen_size.x - .5);
+	c.y = (gl_FragCoord.y / screen_size.y - .5);
 
 	c.x /= zoom;
 	c.y /= zoom;
@@ -24,15 +24,17 @@ void main()
 		double x = (z.x * z.x - z.y * z.y) + c.x;
 		double y = (z.y * z.x + z.x * z.y) + c.y;
 
-		if((x * x + y * y) > 2.0) break;
+		if((x * x + y * y) > 2) break;
 		z.x = x;
 		z.y = y;
 	}
 
 	float t = float(i) / float(itr);
+	float t2 = t * t, subt = 1 - t;
+	float subt2 = subt * subt;
 
-	colorOut = vec4(9.0 * (1.0 - t) * t * t * t,
-			15.0 * (1.0 - t) * (1.0 - t) * t * t,
-			8.5 * (1.0 - t) * (1.0 - t) * (1.0 - t) * t,
+	colorOut = vec4(9   * subt  * t2 * t,
+			15  * subt2 * t2,
+			8.5 * subt2 * t,
 			1);
 }
