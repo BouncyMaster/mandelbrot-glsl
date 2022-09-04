@@ -135,7 +135,6 @@ main(void)
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		// TODO: Do we need doubles in shader?
 		glUniform2d(scrsize_loc, (double)scr[0], (double)scr[1]);
 		glUniform1d(scrratio_loc, (double)scr[0] / (double)scr[1]);
 		glUniform2d(center_loc, cx, cy);
